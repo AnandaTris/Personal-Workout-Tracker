@@ -1,0 +1,120 @@
+.exercise-card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 12px;
+  border: 1px solid var(--border);
+}
+
+.exercise-header {
+  margin-bottom: 10px;
+}
+
+.exercise-name-row {
+  margin-bottom: 2px;
+}
+
+.exercise-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.edit-hint {
+  font-size: 13px;
+  color: var(--border);
+  font-weight: 400;
+  flex-shrink: 0;
+}
+
+.exercise-name:active .edit-hint,
+.exercise-name:hover .edit-hint {
+  color: var(--text-muted);
+}
+
+.exercise-name-input {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 600;
+  padding: 6px 10px;
+}
+
+.exercise-name-input:focus {
+  outline: none;
+}
+
+.exercise-meta {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-transform: capitalize;
+}
+
+.optional-tag {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: var(--border);
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.last-session {
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.last-session--empty .last-label {
+  color: var(--border);
+}
+
+.last-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+.last-sets {
+  font-size: 14px;
+  color: var(--accent);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.last-sep {
+  color: var(--text-muted);
+}
+
+.sets-list {
+  border-top: 1px solid var(--border);
+  padding-top: 4px;
+  margin-bottom: 4px;
+}
+
+.add-set-btn {
+  background: none;
+  color: var(--text-muted);
+  font-size: 14px;
+  padding: 8px 0 2px;
+  width: 100%;
+  text-align: left;
+}
+
+.add-set-btn:active {
+  color: var(--text);
+}
