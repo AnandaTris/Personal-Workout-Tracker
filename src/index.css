@@ -26,12 +26,25 @@
 
 html {
   height: 100%;
-  /* Base dark + dot grid (gym rubber floor) + warm overhead light */
   background-color: #111111;
+  /* Diagonal crosshatch — grip tape / athletic texture */
   background-image:
-    radial-gradient(ellipse 120% 45% at 50% 0%, rgba(249, 115, 22, 0.07) 0%, transparent 65%),
-    radial-gradient(circle, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
-  background-size: 100% 100%, 22px 22px;
+    radial-gradient(ellipse 140% 50% at 50% -5%, rgba(249, 115, 22, 0.06) 0%, transparent 60%),
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 16px,
+      rgba(255, 255, 255, 0.016) 16px,
+      rgba(255, 255, 255, 0.016) 17px
+    ),
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 16px,
+      rgba(255, 255, 255, 0.016) 16px,
+      rgba(255, 255, 255, 0.016) 17px
+    );
+  background-size: 100% 100%, 34px 34px, 34px 34px;
   background-attachment: fixed;
 }
 

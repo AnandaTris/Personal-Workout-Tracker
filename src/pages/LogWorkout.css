@@ -58,6 +58,9 @@
   color: var(--text);
   text-transform: uppercase;
   letter-spacing: 0.02em;
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 1px;
+  display: inline-block;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
