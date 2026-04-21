@@ -30,8 +30,9 @@ export default function Home({ navigate }) {
       <main className="home-main">
         <p className="home-prompt">Select today's session</p>
         <div className="day-grid">
+
           {visibleStaticDays.map(({ day, label }) => (
-            <div key={day} className="day-btn-wrap">
+            <div key={day} className="day-static-wrap">
               <button
                 className="day-btn"
                 data-day={day}
@@ -41,11 +42,11 @@ export default function Home({ navigate }) {
                 <span className="day-label">{label}</span>
               </button>
               <button
-                className="day-edit-btn"
+                className="day-remove-strip"
                 onClick={e => handleDeleteStaticDay(e, day)}
                 aria-label={`Remove Day ${day}`}
               >
-                ✕
+                Remove
               </button>
             </div>
           ))}
@@ -76,6 +77,7 @@ export default function Home({ navigate }) {
             <span className="day-add-icon">+</span>
             <span className="day-label">New Day</span>
           </button>
+
         </div>
       </main>
 

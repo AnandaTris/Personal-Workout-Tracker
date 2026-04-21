@@ -116,7 +116,43 @@
   z-index: 1;
 }
 
-/* Custom day wrapper */
+/* Static day wrapper — card + remove strip stacked */
+.day-static-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.day-static-wrap .day-btn {
+  width: 100%;
+  border-radius: var(--radius) var(--radius) 0 0;
+  border-bottom: none;
+}
+
+.day-remove-strip {
+  width: 100%;
+  height: 22px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 var(--radius) var(--radius);
+  color: var(--text-muted);
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.35;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.day-remove-strip:active {
+  opacity: 1;
+  color: var(--danger);
+  background: rgba(239, 68, 68, 0.07);
+}
+
+/* Custom day wrapper — card + floating edit button */
 .day-btn-wrap {
   position: relative;
 }
@@ -150,7 +186,7 @@
 
 .day-edit-btn:active {
   opacity: 1;
-  color: var(--danger);
+  color: var(--accent);
 }
 
 /* Add Day card */
