@@ -37,6 +37,17 @@ export default function LogWorkout({ day, navigate }) {
     }))
   )
 
+  function hasAnyData() {
+    return sessionExercises.some(ex =>
+      ex.sets.some(s => s.weight !== '' || s.reps !== '')
+    )
+  }
+
+  function goBack() {
+    if (hasAnyData() && !window.confirm('Go back? Your logged sets will be lost.')) return
+    navigate('home')
+  }
+
   function updateSets(exerciseId, newSets) {
     setSessionExercises(prev =>
       prev.map(e => e.exerciseId === exerciseId ? { ...e, sets: newSets } : e)
@@ -78,7 +89,7 @@ export default function LogWorkout({ day, navigate }) {
   return (
     <div className="log-workout">
       <header className="log-header">
-        <button className="log-back" onClick={() => navigate('home')} aria-label="Back">
+        <button className="log-back" onClick={goBack} aria-label="Back">
           ←
         </button>
         <div className="log-title">
