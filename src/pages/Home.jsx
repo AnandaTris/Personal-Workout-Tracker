@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { WORKOUT_DAYS } from '../data/workoutDays'
-import { getCustomDays, getHiddenDays, hideDay } from '../lib/storage'
+import { getCustomDays, deleteCustomDay, getHiddenDays, hideDay } from '../lib/storage'
 import './Home.css'
 
 export default function Home({ navigate }) {
@@ -8,16 +8,23 @@ export default function Home({ navigate }) {
     weekday: 'long', month: 'long', day: 'numeric',
   })
 
-  const customDays = getCustomDays()
   const [hiddenDays, setHiddenDays] = useState(() => getHiddenDays())
+  const [customDays, setCustomDays] = useState(() => getCustomDays())
 
   const visibleStaticDays = WORKOUT_DAYS.filter(d => !hiddenDays.includes(d.day))
 
-  function handleDeleteStaticDay(e, day) {
+  function handleRemoveStatic(e, day) {
     e.stopPropagation()
     if (!window.confirm(`Remove Day ${day} from your home screen?\n\nYour past sessions won't be deleted.`)) return
     hideDay(day)
     setHiddenDays(getHiddenDays())
+  }
+
+  function handleRemoveCustom(e, dayId, label) {
+    e.stopPropagation()
+    if (!window.confirm(`Delete "${label}"?\n\nYour past sessions won't be deleted.`)) return
+    deleteCustomDay(dayId)
+    setCustomDays(getCustomDays())
   }
 
   return (
@@ -43,7 +50,7 @@ export default function Home({ navigate }) {
               </button>
               <button
                 className="day-remove-strip"
-                onClick={e => handleDeleteStaticDay(e, day)}
+                onClick={e => handleRemoveStatic(e, day)}
                 aria-label={`Remove Day ${day}`}
               >
                 Remove
@@ -52,20 +59,29 @@ export default function Home({ navigate }) {
           ))}
 
           {customDays.map((customDay) => (
-            <div key={customDay.day} className="day-btn-wrap">
+            <div key={customDay.day} className="day-static-wrap">
+              <div className="day-card-inner">
+                <button
+                  className="day-btn day-btn--custom"
+                  onClick={() => navigate('log', { day: customDay.day })}
+                >
+                  <span className="day-letter day-letter--custom">Custom</span>
+                  <span className="day-label">{customDay.label}</span>
+                </button>
+                <button
+                  className="day-edit-btn"
+                  onClick={e => { e.stopPropagation(); navigate('editDay', { existingDay: customDay }) }}
+                  aria-label="Edit day"
+                >
+                  ✎
+                </button>
+              </div>
               <button
-                className="day-btn day-btn--custom"
-                onClick={() => navigate('log', { day: customDay.day })}
+                className="day-remove-strip"
+                onClick={e => handleRemoveCustom(e, customDay.day, customDay.label)}
+                aria-label={`Remove ${customDay.label}`}
               >
-                <span className="day-letter day-letter--custom">Custom</span>
-                <span className="day-label">{customDay.label}</span>
-              </button>
-              <button
-                className="day-edit-btn"
-                onClick={e => { e.stopPropagation(); navigate('editDay', { existingDay: customDay }) }}
-                aria-label="Edit day"
-              >
-                ✎
+                Remove
               </button>
             </div>
           ))}

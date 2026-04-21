@@ -153,6 +153,17 @@
 }
 
 /* Custom day wrapper — card + floating edit button */
+.day-card-inner {
+  position: relative;
+}
+
+.day-card-inner .day-btn {
+  width: 100%;
+  border-radius: var(--radius) var(--radius) 0 0;
+  border-bottom: none;
+  padding-right: 28px;
+}
+
 .day-btn-wrap {
   position: relative;
 }
