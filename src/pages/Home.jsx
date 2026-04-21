@@ -13,6 +13,14 @@ export default function Home({ navigate }) {
 
   const visibleStaticDays = WORKOUT_DAYS.filter(d => !hiddenDays.includes(d.day))
 
+  const customOverrides = Object.fromEntries(
+    customDays
+      .filter(d => ['A', 'B', 'C', 'D'].includes(d.day))
+      .map(d => [d.day, d])
+  )
+
+  const trueCustomDays = customDays.filter(d => !['A', 'B', 'C', 'D'].includes(d.day))
+
   function handleRemoveStatic(e, day) {
     e.stopPropagation()
     if (!window.confirm(`Remove Day ${day} from your home screen?\n\nYour past sessions won't be deleted.`)) return
@@ -38,27 +46,41 @@ export default function Home({ navigate }) {
         <p className="home-prompt">Select today's session</p>
         <div className="day-grid">
 
-          {visibleStaticDays.map(({ day, label }) => (
-            <div key={day} className="day-static-wrap">
-              <button
-                className="day-btn"
-                data-day={day}
-                onClick={() => navigate('log', { day })}
-              >
-                <span className="day-letter">Day {day}</span>
-                <span className="day-label">{label}</span>
-              </button>
-              <button
-                className="day-remove-strip"
-                onClick={e => handleRemoveStatic(e, day)}
-                aria-label={`Remove Day ${day}`}
-              >
-                Remove
-              </button>
-            </div>
-          ))}
+          {visibleStaticDays.map(({ day, label, exercises }) => {
+            const override = customOverrides[day]
+            const displayLabel = override?.label ?? label
+            const editPayload = override ?? { day, label, exercises }
+            return (
+              <div key={day} className="day-static-wrap">
+                <div className="day-card-inner">
+                  <button
+                    className="day-btn"
+                    data-day={day}
+                    onClick={() => navigate('log', { day })}
+                  >
+                    <span className="day-letter">Day {day}</span>
+                    <span className="day-label">{displayLabel}</span>
+                  </button>
+                  <button
+                    className="day-edit-btn"
+                    onClick={e => { e.stopPropagation(); navigate('editDay', { existingDay: editPayload }) }}
+                    aria-label={`Edit Day ${day}`}
+                  >
+                    ✎
+                  </button>
+                </div>
+                <button
+                  className="day-remove-strip"
+                  onClick={e => handleRemoveStatic(e, day)}
+                  aria-label={`Remove Day ${day}`}
+                >
+                  Remove
+                </button>
+              </div>
+            )
+          })}
 
-          {customDays.map((customDay) => (
+          {trueCustomDays.map((customDay) => (
             <div key={customDay.day} className="day-static-wrap">
               <div className="day-card-inner">
                 <button

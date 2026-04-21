@@ -13,8 +13,11 @@ function newExercise() {
   }
 }
 
+const STATIC_IDS = ['A', 'B', 'C', 'D']
+
 export default function EditDay({ existingDay, navigate }) {
   const isNew = !existingDay
+  const isStaticOverride = existingDay && STATIC_IDS.includes(existingDay.day)
   const [label, setLabel] = useState(existingDay?.label ?? '')
   const [exercises, setExercises] = useState(
     existingDay?.exercises.map(ex => ({ ...ex })) ?? [newExercise()]
@@ -61,7 +64,10 @@ export default function EditDay({ existingDay, navigate }) {
   }
 
   function handleDelete() {
-    if (window.confirm(`Delete "${existingDay.label}"?\n\nPast sessions using this day won't be deleted.`)) {
+    const msg = isStaticOverride
+      ? `Reset Day ${existingDay.day} back to its default exercises?\n\nPast sessions won't be affected.`
+      : `Delete "${existingDay.label}"?\n\nPast sessions using this day won't be deleted.`
+    if (window.confirm(msg)) {
       deleteCustomDay(existingDay.day)
       navigate('home')
     }
@@ -146,7 +152,9 @@ export default function EditDay({ existingDay, navigate }) {
         <button className="add-ex-btn" onClick={addExercise}>+ Add exercise</button>
 
         {!isNew && (
-          <button className="delete-day-btn" onClick={handleDelete}>Delete Day</button>
+          <button className="delete-day-btn" onClick={handleDelete}>
+            {isStaticOverride ? 'Reset to Default' : 'Delete Day'}
+          </button>
         )}
       </main>
 

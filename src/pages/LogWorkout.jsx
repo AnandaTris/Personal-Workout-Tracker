@@ -9,7 +9,7 @@ function initSets(exercise) {
 }
 
 export default function LogWorkout({ day, navigate }) {
-  const dayConfig = getDayConfig(day) ?? getCustomDays().find(d => d.day === day)
+  const dayConfig = getCustomDays().find(d => d.day === day) ?? getDayConfig(day)
 
   // Load last session data and custom names once on mount
   const lastSessions = useMemo(() =>
