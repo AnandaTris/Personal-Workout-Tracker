@@ -1,5 +1,6 @@
+import { useState } from 'react'
 import { WORKOUT_DAYS } from '../data/workoutDays'
-import { getCustomDays } from '../lib/storage'
+import { getCustomDays, getHiddenDays, hideDay } from '../lib/storage'
 import './Home.css'
 
 export default function Home({ navigate }) {
@@ -8,6 +9,16 @@ export default function Home({ navigate }) {
   })
 
   const customDays = getCustomDays()
+  const [hiddenDays, setHiddenDays] = useState(() => getHiddenDays())
+
+  const visibleStaticDays = WORKOUT_DAYS.filter(d => !hiddenDays.includes(d.day))
+
+  function handleDeleteStaticDay(e, day) {
+    e.stopPropagation()
+    if (!window.confirm(`Remove Day ${day} from your home screen?\n\nYour past sessions won't be deleted.`)) return
+    hideDay(day)
+    setHiddenDays(getHiddenDays())
+  }
 
   return (
     <div className="home">
@@ -19,16 +30,24 @@ export default function Home({ navigate }) {
       <main className="home-main">
         <p className="home-prompt">Select today's session</p>
         <div className="day-grid">
-          {WORKOUT_DAYS.map(({ day, label }) => (
-            <button
-              key={day}
-              className="day-btn"
-              data-day={day}
-              onClick={() => navigate('log', { day })}
-            >
-              <span className="day-letter">Day {day}</span>
-              <span className="day-label">{label}</span>
-            </button>
+          {visibleStaticDays.map(({ day, label }) => (
+            <div key={day} className="day-btn-wrap">
+              <button
+                className="day-btn"
+                data-day={day}
+                onClick={() => navigate('log', { day })}
+              >
+                <span className="day-letter">Day {day}</span>
+                <span className="day-label">{label}</span>
+              </button>
+              <button
+                className="day-edit-btn"
+                onClick={e => handleDeleteStaticDay(e, day)}
+                aria-label={`Remove Day ${day}`}
+              >
+                ✕
+              </button>
+            </div>
           ))}
 
           {customDays.map((customDay) => (

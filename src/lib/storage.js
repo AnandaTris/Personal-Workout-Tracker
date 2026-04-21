@@ -79,3 +79,26 @@ export function deleteCustomDay(dayId) {
   const days = getCustomDays().filter(d => d.day !== dayId)
   localStorage.setItem(CUSTOM_DAYS_KEY, JSON.stringify(days))
 }
+
+const HIDDEN_DAYS_KEY = 'wt_hidden_days'
+
+export function getHiddenDays() {
+  try {
+    return JSON.parse(localStorage.getItem(HIDDEN_DAYS_KEY)) ?? []
+  } catch {
+    return []
+  }
+}
+
+export function hideDay(dayId) {
+  const hidden = getHiddenDays()
+  if (!hidden.includes(dayId)) {
+    hidden.push(dayId)
+    localStorage.setItem(HIDDEN_DAYS_KEY, JSON.stringify(hidden))
+  }
+}
+
+export function deleteSession(sessionId) {
+  const sessions = getSessions().filter(s => s.id !== sessionId)
+  localStorage.setItem(SESSIONS_KEY, JSON.stringify(sessions))
+}

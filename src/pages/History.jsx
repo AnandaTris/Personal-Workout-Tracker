@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { getSessions, getCustomDays, getExerciseNames } from '../lib/storage'
+import { getSessions, getCustomDays, getExerciseNames, deleteSession } from '../lib/storage'
 import { getDayConfig, WORKOUT_DAYS } from '../data/workoutDays'
 import './History.css'
 
@@ -18,9 +18,9 @@ function formatDate(isoDate) {
 }
 
 export default function History({ navigate }) {
-  const sessions = getSessions().slice().reverse()
   const customDays = getCustomDays()
   const customNames = getExerciseNames()
+  const [sessions, setSessions] = useState(() => getSessions().slice().reverse())
   const [expanded, setExpanded] = useState(null)
 
   function getExerciseName(exerciseId) {
@@ -34,6 +34,14 @@ export default function History({ navigate }) {
 
   function toggle(id) {
     setExpanded(prev => prev === id ? null : id)
+  }
+
+  function handleDelete(e, sessionId) {
+    e.stopPropagation()
+    if (!window.confirm('Delete this session? This cannot be undone.')) return
+    deleteSession(sessionId)
+    setSessions(prev => prev.filter(s => s.id !== sessionId))
+    if (expanded === sessionId) setExpanded(null)
   }
 
   return (
@@ -73,7 +81,16 @@ export default function History({ navigate }) {
                       </span>
                     )}
                   </div>
-                  <span className="session-chevron">{isOpen ? '▲' : '▼'}</span>
+                  <div className="session-summary-right">
+                    <button
+                      className="session-delete-btn"
+                      onClick={e => handleDelete(e, session.id)}
+                      aria-label="Delete session"
+                    >
+                      🗑
+                    </button>
+                    <span className="session-chevron">{isOpen ? '▲' : '▼'}</span>
+                  </div>
                 </button>
 
                 {isOpen && (
