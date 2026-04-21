@@ -1,0 +1,167 @@
+.progression {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.progression-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 16px 12px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+  background: var(--bg);
+}
+
+.progression-back {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progression-back:active {
+  background: var(--border);
+}
+
+.progression-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.progression-selector {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.selector-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-muted);
+}
+
+.selector-select {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-size: 15px;
+  font-family: inherit;
+  padding: 12px 14px;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2394a3b8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+}
+
+.selector-select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.progression-main {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.progression-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 6px;
+  padding-bottom: 60px;
+}
+
+.progression-empty-icon {
+  font-size: 36px;
+  margin-bottom: 6px;
+}
+
+.progression-empty-text {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.progression-empty-name {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.progression-empty-sub {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* Table */
+.prog-table-header {
+  display: grid;
+  grid-template-columns: 72px 110px 1fr;
+  gap: 8px;
+  padding: 10px 16px 8px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+
+.prog-row {
+  display: grid;
+  grid-template-columns: 72px 110px 1fr;
+  gap: 8px;
+  align-items: start;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.prog-row:last-child {
+  border-bottom: none;
+}
+
+.prog-date {
+  font-size: 13px;
+  color: var(--text-muted);
+  padding-top: 2px;
+}
+
+.prog-best {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.prog-sets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.prog-set-chip {
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 7px;
+}

@@ -1,4 +1,19 @@
 const SESSIONS_KEY = 'wt_sessions'
+const EXERCISE_NAMES_KEY = 'wt_exercise_names'
+
+export function getExerciseNames() {
+  try {
+    return JSON.parse(localStorage.getItem(EXERCISE_NAMES_KEY)) ?? {}
+  } catch {
+    return {}
+  }
+}
+
+export function saveExerciseName(exerciseId, name) {
+  const names = getExerciseNames()
+  names[exerciseId] = name.trim()
+  localStorage.setItem(EXERCISE_NAMES_KEY, JSON.stringify(names))
+}
 
 export function getSessions() {
   try {
@@ -37,4 +52,30 @@ export function getLastSetsForExercise(exerciseId) {
 
 export function createSessionId() {
   return crypto.randomUUID ? crypto.randomUUID() : Date.now().toString()
+}
+
+const CUSTOM_DAYS_KEY = 'wt_custom_days'
+
+export function getCustomDays() {
+  try {
+    return JSON.parse(localStorage.getItem(CUSTOM_DAYS_KEY)) ?? []
+  } catch {
+    return []
+  }
+}
+
+export function saveCustomDay(day) {
+  const days = getCustomDays()
+  const idx = days.findIndex(d => d.day === day.day)
+  if (idx !== -1) {
+    days[idx] = day
+  } else {
+    days.push(day)
+  }
+  localStorage.setItem(CUSTOM_DAYS_KEY, JSON.stringify(days))
+}
+
+export function deleteCustomDay(dayId) {
+  const days = getCustomDays().filter(d => d.day !== dayId)
+  localStorage.setItem(CUSTOM_DAYS_KEY, JSON.stringify(days))
 }

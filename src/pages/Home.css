@@ -1,0 +1,167 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 0 16px;
+}
+
+.home-header {
+  padding: 32px 0 24px;
+  text-align: center;
+}
+
+.home-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.5px;
+}
+
+.home-date {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.home-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 24px;
+}
+
+.home-prompt {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.day-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.day-btn {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+  border: 1px solid var(--border);
+  transition: border-color 0.15s, background 0.15s;
+  min-height: 100px;
+}
+
+.day-btn:active {
+  background: #263348;
+  border-color: var(--accent);
+}
+
+/* Custom day wrapper — positions the edit button */
+.day-btn-wrap {
+  position: relative;
+}
+
+.day-btn-wrap .day-btn {
+  width: 100%;
+}
+
+.day-btn--custom {
+  padding-right: 36px; /* leave room for edit button */
+}
+
+.day-letter--custom {
+  color: var(--success);
+}
+
+.day-edit-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.day-edit-btn:active {
+  background: var(--border);
+  color: var(--text);
+}
+
+.day-btn--add {
+  border-style: dashed;
+  background: transparent;
+  align-items: center;
+  justify-content: center;
+  min-height: 80px;
+}
+
+.day-add-icon {
+  font-size: 24px;
+  color: var(--text-muted);
+  line-height: 1;
+}
+
+.day-btn--add .day-label {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.day-letter {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.day-label {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.home-nav {
+  display: flex;
+  gap: 12px;
+  padding: 16px 0 32px;
+  border-top: 1px solid var(--border);
+}
+
+.nav-btn {
+  flex: 1;
+  background: var(--bg-card);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 15px;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.nav-btn:active {
+  color: var(--text);
+  background: #263348;
+}
+
+.nav-icon {
+  font-size: 16px;
+}
