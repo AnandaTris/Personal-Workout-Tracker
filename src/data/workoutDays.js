@@ -1,7 +1,7 @@
 export const WORKOUT_DAYS = [
   {
     day: 'A',
-    label: 'Upper — Chest + Back',
+    label: 'Chest + Back',
     exercises: [
       { id: 'incline-smith-press',      name: 'Incline Smith Press',      sets: 2, repsTarget: '6–8',  type: 'compound' },
       { id: 'single-hand-seated-row',   name: 'Single-Hand Seated Row',   sets: 2, repsTarget: '8',    type: 'compound' },
@@ -25,7 +25,7 @@ export const WORKOUT_DAYS = [
   },
   {
     day: 'C',
-    label: 'Upper — Chest + Back (variation)',
+    label: 'Chest + Back (version 2)',
     exercises: [
       { id: 'incline-dumbbell-press',   name: 'Incline Dumbbell Press',   sets: 3, repsTarget: '8',    type: 'compound' },
       { id: 'single-hand-lat-pulldown', name: 'Single-Hand Lat Pulldown', sets: 2, repsTarget: '9',    type: 'compound' },
