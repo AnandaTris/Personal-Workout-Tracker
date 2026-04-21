@@ -1,9 +1,9 @@
-#Personal Workout App
-##Workout App(personal)
+# Personal Workout App
+## Workout App(personal)
 Simple app I built for my self to remember the working sets and workouts in the gym as well as keep track of the weights for progressive overload
-##How it's used 
+## How it's used 
 Just put all fo your days into the app and then put the names of the workout in. Keep track of your sets and reps alongside with the weights that you can do.
-##Tech Stack Used                   
+## Tech Stack Used                   
   Runtime & Build                                                               
   - Node.js - JavaScript runtime                                                
   - Vite 7 - build tool and dev server                                          
