@@ -5,78 +5,115 @@
   padding: 0 16px;
 }
 
+/* ── Header ── */
 .home-header {
-  padding: 32px 0 24px;
-  text-align: center;
+  padding: 36px 0 20px;
 }
 
 .home-title {
-  font-size: 26px;
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 800;
   color: var(--text);
   letter-spacing: -0.5px;
+  line-height: 1;
+  text-transform: uppercase;
 }
 
 .home-date {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text-muted);
-  margin-top: 4px;
+  margin-top: 6px;
+  letter-spacing: 0.02em;
 }
 
+/* ── Main ── */
 .home-main {
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   overflow-y: auto;
-  padding: 8px 0 24px;
+  padding: 8px 0 20px;
   min-height: 0;
 }
 
 .home-prompt {
-  font-size: 13px;
+  font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   color: var(--text-muted);
-  margin-bottom: 16px;
-  text-align: center;
+  margin-bottom: 14px;
 }
 
+/* ── Day Grid ── */
 .day-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 10px;
 }
 
 .day-btn {
+  position: relative;
+  overflow: hidden;
   background: var(--bg-card);
   border-radius: var(--radius);
-  padding: 20px 16px;
+  padding: 18px 16px 16px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
   text-align: left;
   border: 1px solid var(--border);
-  transition: border-color 0.15s, background 0.15s;
-  min-height: 100px;
+  min-height: 110px;
+  transition: border-color 0.12s;
+}
+
+/* Decorative ghost letter */
+.day-btn::after {
+  content: attr(data-day);
+  position: absolute;
+  bottom: -14px;
+  right: 2px;
+  font-family: var(--font-display);
+  font-size: 96px;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.04);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
 }
 
 .day-btn:active {
-  background: #263348;
   border-color: var(--accent);
+  background: #1f1f1f;
 }
 
-/* Custom day wrapper — positions the edit button */
+.day-letter {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.day-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1.35;
+  position: relative;
+  z-index: 1;
+}
+
+/* Custom day wrapper */
 .day-btn-wrap {
   position: relative;
 }
 
 .day-btn-wrap .day-btn {
   width: 100%;
-}
-
-.day-btn--custom {
-  padding-right: 36px; /* leave room for edit button */
+  padding-right: 36px;
 }
 
 .day-letter--custom {
@@ -85,26 +122,27 @@
 
 .day-edit-btn {
   position: absolute;
-  top: 8px;
-  right: 8px;
-  background: var(--bg);
+  top: 10px;
+  right: 10px;
+  background: var(--bg-elevated);
   border: 1px solid var(--border);
   color: var(--text-muted);
   width: 28px;
   height: 28px;
   border-radius: 6px;
-  font-size: 14px;
+  font-size: 13px;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1;
+  z-index: 2;
 }
 
 .day-edit-btn:active {
-  background: var(--border);
+  background: var(--border-bright);
   color: var(--text);
 }
 
+/* Add Day card */
 .day-btn--add {
   border-style: dashed;
   background: transparent;
@@ -113,35 +151,28 @@
   min-height: 80px;
 }
 
+.day-btn--add::after {
+  display: none;
+}
+
 .day-add-icon {
-  font-size: 24px;
-  color: var(--text-muted);
+  font-size: 22px;
+  color: var(--border-bright);
   line-height: 1;
 }
 
 .day-btn--add .day-label {
+  font-size: 13px;
   color: var(--text-muted);
-  font-size: 13px;
+  font-weight: 400;
 }
 
-.day-letter {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--accent);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.day-label {
-  font-size: 14px;
-  color: var(--text);
-  line-height: 1.4;
-}
-
+/* ── Bottom nav ── */
 .home-nav {
   display: flex;
-  gap: 12px;
-  padding: 16px 0 32px;
+  gap: 10px;
+  padding: 16px 0;
+  padding-bottom: max(16px, env(safe-area-inset-bottom));
   border-top: 1px solid var(--border);
 }
 
@@ -149,21 +180,24 @@
   flex: 1;
   background: var(--bg-card);
   border-radius: var(--radius-sm);
-  padding: 14px;
+  padding: 13px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  font-size: 15px;
+  gap: 7px;
+  font-size: 14px;
+  font-weight: 500;
   color: var(--text-muted);
   border: 1px solid var(--border);
+  letter-spacing: 0.01em;
 }
 
 .nav-btn:active {
   color: var(--text);
-  background: #263348;
+  border-color: var(--border-bright);
+  background: var(--bg-elevated);
 }
 
 .nav-icon {
-  font-size: 16px;
+  font-size: 15px;
 }

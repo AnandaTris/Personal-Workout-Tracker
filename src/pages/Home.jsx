@@ -23,6 +23,7 @@ export default function Home({ navigate }) {
             <button
               key={day}
               className="day-btn"
+              data-day={day}
               onClick={() => navigate('log', { day })}
             >
               <span className="day-letter">Day {day}</span>

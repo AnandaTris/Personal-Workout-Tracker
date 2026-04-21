@@ -1,49 +1,60 @@
 .exercise-card {
   background: var(--bg-card);
   border-radius: var(--radius);
-  padding: 16px;
-  margin-bottom: 12px;
+  padding: 0;
+  margin-bottom: 10px;
   border: 1px solid var(--border);
+  overflow: hidden;
+  /* Orange left accent bar */
+  border-left: 3px solid var(--accent);
 }
 
 .exercise-header {
-  margin-bottom: 10px;
+  padding: 14px 14px 10px;
 }
 
 .exercise-name-row {
-  margin-bottom: 2px;
+  margin-bottom: 3px;
 }
 
 .exercise-name {
-  font-size: 16px;
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
   color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
   display: flex;
   align-items: center;
   gap: 8px;
   cursor: pointer;
+  line-height: 1.1;
 }
 
 .edit-hint {
+  font-family: var(--font-body);
   font-size: 13px;
-  color: var(--border);
+  color: var(--border-bright);
   font-weight: 400;
   flex-shrink: 0;
+  transition: color 0.1s;
 }
 
-.exercise-name:active .edit-hint,
-.exercise-name:hover .edit-hint {
+.exercise-name:active .edit-hint {
   color: var(--text-muted);
 }
 
 .exercise-name-input {
   width: 100%;
-  background: var(--bg);
+  background: var(--bg-elevated);
   border: 1px solid var(--accent);
   border-radius: var(--radius-sm);
   color: var(--text);
-  font-size: 16px;
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
   padding: 6px 10px;
 }
 
@@ -55,66 +66,76 @@
   font-size: 12px;
   color: var(--text-muted);
   text-transform: capitalize;
+  letter-spacing: 0.01em;
 }
 
 .optional-tag {
-  font-size: 11px;
-  font-weight: 500;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 600;
   color: var(--text-muted);
   background: var(--border);
   padding: 2px 6px;
   border-radius: 4px;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
 }
 
+/* Last session block */
 .last-session {
-  background: var(--bg);
-  border-radius: var(--radius-sm);
-  padding: 8px 12px;
-  margin-bottom: 12px;
+  background: var(--accent-glow);
+  border-top: 1px solid rgba(249, 115, 22, 0.15);
+  padding: 8px 14px;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 2px;
+}
+
+.last-session--empty {
+  background: transparent;
+  border-top: 1px solid var(--border);
 }
 
 .last-session--empty .last-label {
-  color: var(--border);
+  color: var(--border-bright);
 }
 
 .last-label {
-  font-size: 11px;
+  font-size: 10px;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  color: rgba(249, 115, 22, 0.6);
 }
 
 .last-sets {
-  font-size: 14px;
+  font-size: 13px;
+  font-weight: 600;
   color: var(--accent);
-  font-weight: 500;
   line-height: 1.5;
 }
 
 .last-sep {
-  color: var(--text-muted);
+  color: rgba(249, 115, 22, 0.4);
 }
 
+/* Sets */
 .sets-list {
   border-top: 1px solid var(--border);
-  padding-top: 4px;
-  margin-bottom: 4px;
+  padding: 4px 14px 0;
 }
 
 .add-set-btn {
+  display: block;
   background: none;
   color: var(--text-muted);
-  font-size: 14px;
-  padding: 8px 0 2px;
+  font-size: 13px;
+  padding: 10px 14px;
   width: 100%;
   text-align: left;
+  border-top: 1px solid var(--border);
+  letter-spacing: 0.02em;
 }
 
 .add-set-btn:active {
-  color: var(--text);
+  color: var(--accent);
 }
