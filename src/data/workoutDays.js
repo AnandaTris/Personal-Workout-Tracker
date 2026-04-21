@@ -3,7 +3,7 @@ export const WORKOUT_DAYS = [
     day: 'A',
     label: 'Upper — Chest + Back',
     exercises: [
-      { id: 'incline-smith-press',      name: 'Incline Smith Press',      sets: 3, repsTarget: '6–8',  type: 'compound' },
+      { id: 'incline-smith-press',      name: 'Incline Smith Press',      sets: 2, repsTarget: '6–8',  type: 'compound' },
       { id: 'single-hand-seated-row',   name: 'Single-Hand Seated Row',   sets: 2, repsTarget: '8',    type: 'compound' },
       { id: 'low-to-high-cable-fly',    name: 'Low-to-High Cable Fly',    sets: 2, repsTarget: '10',   type: 'isolation' },
       { id: 't-bar-row',                name: 'T-Bar Row',                sets: 2, repsTarget: '7',    type: 'compound' },
