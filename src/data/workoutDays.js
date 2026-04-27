@@ -31,7 +31,7 @@ export const WORKOUT_DAYS = [
       { id: 'single-hand-lat-pulldown', name: 'Single-Hand Lat Pulldown', sets: 2, repsTarget: '6-8',    type: 'compound' },
       { id: 'pec-dec-fly',              name: 'Pec Dec Fly',              sets: 2, repsTarget: '6-8',   type: 'isolation' },
       { id: 't-bar-row',                name: 'T-Bar Row',                sets: 2, repsTarget: '6-8',    type: 'compound' },
-      { id: 'lateral-raise',            name: 'Lateral Raise',            sets: 2, repsTarget: '12',   type: 'isolation' },
+      { id: 'rear-delt-fly',            name: 'Rear Delt Fly',            sets: 2, repsTarget: '12',   type: 'isolation' },
     ],
   },
   {
