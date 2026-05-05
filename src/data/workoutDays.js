@@ -8,7 +8,7 @@ export const WORKOUT_DAYS = [
       { id: 'low-to-high-cable-fly',    name: 'Low-to-High Cable Fly',    sets: 2, repsTarget: '10',   type: 'isolation' },
       { id: 't-bar-row',                name: 'T-Bar Row',                sets: 2, repsTarget: '6-8',    type: 'compound' },
       { id: 'bayesian-curl',            name: 'Bayesian Curl',            sets: 2, repsTarget: '6-8',   type: 'isolation' },
-      { id: 'lateral-raise',            name: 'Lateral Raise',            sets: 3, repsTarget: '12',   type: 'isolation' },
+      { id: 'lateral-raise',            name: 'Lateral Raise',            sets: 2, repsTarget: '12',   type: 'isolation' },
     ],
   },
   {
@@ -27,8 +27,8 @@ export const WORKOUT_DAYS = [
     label: 'Arms + Shoulders',
     exercises: [
       { id: 'shoulder-press',           name: 'Shoulder Press',           sets: 2, repsTarget: '6-8',   type: 'compound' },
-      { id: 'lateral-raise',            name: 'Lateral Raise',            sets: 3, repsTarget: '12',    type: 'isolation' },
-      { id: 'rear-delt-fly',            name: 'Rear Delt Fly',            sets: 3, repsTarget: '12',    type: 'isolation' },
+      { id: 'lateral-raise',            name: 'Lateral Raise',            sets: 2, repsTarget: '12',    type: 'isolation' },
+      { id: 'rear-delt-fly',            name: 'Rear Delt Fly',            sets: 2, repsTarget: '12',    type: 'isolation' },
       { id: 'bayesian-curl',            name: 'Bayesian Curl',            sets: 2, repsTarget: '6-8',   type: 'isolation' },
       { id: 'hammer-curl',              name: 'Hammer Curl',              sets: 2, repsTarget: '6-8',   type: 'compound' },
       { id: 'overhead-tricep-extension',name: 'Overhead Tricep Extension',sets: 2, repsTarget: '6-8',   type: 'isolation' },
