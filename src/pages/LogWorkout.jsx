@@ -82,7 +82,16 @@ export default function LogWorkout({ day, navigate }) {
       exercises: filledExercises,
     }
 
-    saveSession(session)
+    try {
+      saveSession(session)
+    } catch {
+      window.alert(
+        "Couldn't save this workout — your device storage may be full or " +
+        'disabled. Nothing has been lost; please free up space and tap ' +
+        'Finish Workout again.'
+      )
+      return
+    }
     navigate('home')
   }
 
