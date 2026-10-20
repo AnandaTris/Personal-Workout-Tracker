@@ -103,3 +103,48 @@
 .finish-btn:active {
   background: var(--accent-dim);
 }
+
+.log-footer {
+  display: flex;
+  gap: 10px;
+}
+
+.log-footer .finish-btn {
+  flex: 1;
+}
+
+.save-btn {
+  flex-shrink: 0;
+  min-width: 112px;
+  background: transparent;
+  border: 1px solid var(--border-bright);
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 15px 14px;
+  border-radius: var(--radius);
+}
+
+.save-btn:active {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.log-discard {
+  margin-left: auto;
+  flex-shrink: 0;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 13px;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+}
+
+.log-discard:active {
+  border-color: var(--danger);
+  color: var(--danger);
+}

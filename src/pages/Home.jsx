@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { WORKOUT_DAYS } from '../data/workoutDays'
-import { getCustomDays, deleteCustomDay, getHiddenDays, hideDay } from '../lib/storage'
+import { getCustomDays, deleteCustomDay, getHiddenDays, hideDay, getDraft } from '../lib/storage'
 import './Home.css'
 
 export default function Home({ navigate }) {
@@ -60,6 +60,7 @@ export default function Home({ navigate }) {
                   >
                     <span className="day-letter">Day {day}</span>
                     <span className="day-label">{displayLabel}</span>
+                    {getDraft(day) && <span className="day-in-progress">In progress</span>}
                   </button>
                   <button
                     className="day-edit-btn"
@@ -89,6 +90,7 @@ export default function Home({ navigate }) {
                 >
                   <span className="day-letter day-letter--custom">Custom</span>
                   <span className="day-label">{customDay.label}</span>
+                  {getDraft(customDay.day) && <span className="day-in-progress">In progress</span>}
                 </button>
                 <button
                   className="day-edit-btn"

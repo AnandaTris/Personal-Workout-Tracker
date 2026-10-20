@@ -175,3 +175,34 @@ export function deleteSession(sessionId) {
   const sessions = getSessions().filter(s => s.id !== sessionId)
   writeJSON(SESSIONS_KEY, sessions)
 }
+
+// ── In-progress workout drafts ──
+// A draft holds the sets typed so far for one day, so an app reload (or the
+// OS killing the PWA mid-workout) doesn't wipe them before "Finish Workout".
+const DRAFT_PREFIX = 'wt_draft_'
+const ACTIVE_DRAFT_KEY = 'wt_active_draft'
+
+export function getDraft(day) {
+  const value = readJSON(DRAFT_PREFIX + day, null)
+  return value && typeof value === 'object' && Array.isArray(value.exercises) ? value : null
+}
+
+export function saveDraft(day, draft) {
+  writeJSON(DRAFT_PREFIX + day, { ...draft, savedAt: new Date().toISOString() })
+  writeJSON(ACTIVE_DRAFT_KEY, day)
+}
+
+export function clearDraft(day) {
+  try {
+    localStorage.removeItem(DRAFT_PREFIX + day)
+    if (readJSON(ACTIVE_DRAFT_KEY, null) === day) localStorage.removeItem(ACTIVE_DRAFT_KEY)
+  } catch {
+    // Storage unavailable — nothing to clear.
+  }
+}
+
+/** The day whose workout was last in progress, if its draft still exists. */
+export function getActiveDraftDay() {
+  const day = readJSON(ACTIVE_DRAFT_KEY, null)
+  return typeof day === 'string' && getDraft(day) ? day : null
+}

@@ -259,3 +259,11 @@
 .nav-icon {
   font-size: 15px;
 }
+
+.day-in-progress {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--success);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}

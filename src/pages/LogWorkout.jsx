@@ -1,6 +1,9 @@
 import { useState, useMemo } from 'react'
 import { getDayConfig } from '../data/workoutDays'
-import { getLastSetsForExercise, saveSession, createSessionId, getExerciseNames, getCustomDays } from '../lib/storage'
+import {
+  getLastSetsForExercise, saveSession, createSessionId, getExerciseNames, getCustomDays,
+  getDraft, saveDraft, clearDraft,
+} from '../lib/storage'
 import ExerciseCard from '../components/ExerciseCard'
 import './LogWorkout.css'
 
@@ -30,12 +33,20 @@ export default function LogWorkout({ day, navigate }) {
     []
   )
 
+  // Resume an unfinished workout for this day if one was saved
+  const [draft] = useState(() => getDraft(day))
+  const [startedDate] = useState(() =>
+    draft?.startedDate ?? new Date().toISOString().split('T')[0]
+  )
+
   const [sessionExercises, setSessionExercises] = useState(() =>
     dayConfig.exercises.map(ex => ({
       exerciseId: ex.id,
-      sets: initSets(ex),
+      sets: draft?.exercises.find(e => e.exerciseId === ex.id)?.sets ?? initSets(ex),
     }))
   )
+
+  const [saveStatus, setSaveStatus] = useState(draft ? 'saved' : 'idle')
 
   function hasAnyData() {
     return sessionExercises.some(ex =>
@@ -43,15 +54,51 @@ export default function LogWorkout({ day, navigate }) {
     )
   }
 
+  function persistDraft(exercises = sessionExercises) {
+    saveDraft(day, { startedDate, exercises })
+  }
+
+  function saveProgress() {
+    try {
+      persistDraft()
+      setSaveStatus('saved')
+    } catch {
+      setSaveStatus('error')
+      window.alert(
+        "Couldn't save your progress — your device storage may be full or disabled."
+      )
+    }
+  }
+
   function goBack() {
-    if (hasAnyData() && !window.confirm('Go back? Your logged sets will be lost.')) return
+    if (hasAnyData()) {
+      try {
+        persistDraft()
+      } catch {
+        if (!window.confirm("Couldn't save your sets. Go back anyway and lose them?")) return
+      }
+    }
+    navigate('home')
+  }
+
+  function discardWorkout() {
+    if (!window.confirm('Discard this workout? All sets logged so far will be deleted.')) return
+    clearDraft(day)
     navigate('home')
   }
 
   function updateSets(exerciseId, newSets) {
-    setSessionExercises(prev =>
-      prev.map(e => e.exerciseId === exerciseId ? { ...e, sets: newSets } : e)
+    const next = sessionExercises.map(e =>
+      e.exerciseId === exerciseId ? { ...e, sets: newSets } : e
     )
+    setSessionExercises(next)
+    // Autosave every change so a reload never loses logged sets
+    try {
+      persistDraft(next)
+      setSaveStatus('saved')
+    } catch {
+      setSaveStatus('error')
+    }
   }
 
   function finishWorkout() {
@@ -70,6 +117,7 @@ export default function LogWorkout({ day, navigate }) {
 
     if (filledExercises.length === 0) {
       if (window.confirm('No sets logged. Discard session?')) {
+        clearDraft(day)
         navigate('home')
       }
       return
@@ -78,7 +126,7 @@ export default function LogWorkout({ day, navigate }) {
     const session = {
       id: createSessionId(),
       day,
-      date: new Date().toISOString().split('T')[0],
+      date: startedDate,
       exercises: filledExercises,
     }
 
@@ -92,6 +140,7 @@ export default function LogWorkout({ day, navigate }) {
       )
       return
     }
+    clearDraft(day)
     navigate('home')
   }
 
@@ -105,6 +154,11 @@ export default function LogWorkout({ day, navigate }) {
           <span className="log-day-badge">{['A','B','C','D'].includes(day) ? `Day ${day}` : 'Custom'}</span>
           <span className="log-day-label">{dayConfig.label}</span>
         </div>
+        {(draft || hasAnyData()) && (
+          <button className="log-discard" onClick={discardWorkout}>
+            Discard
+          </button>
+        )}
       </header>
 
       <main className="log-main">
@@ -122,6 +176,9 @@ export default function LogWorkout({ day, navigate }) {
       </main>
 
       <footer className="log-footer">
+        <button className="save-btn" onClick={saveProgress}>
+          {saveStatus === 'saved' ? 'Saved ✓' : saveStatus === 'error' ? 'Retry Save' : 'Save'}
+        </button>
         <button className="finish-btn" onClick={finishWorkout}>
           Finish Workout
         </button>
