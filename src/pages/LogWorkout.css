@@ -113,7 +113,7 @@
   flex: 1;
 }
 
-.save-btn {
+.log-save-btn {
   flex-shrink: 0;
   min-width: 112px;
   background: transparent;
@@ -128,7 +128,7 @@
   border-radius: var(--radius);
 }
 
-.save-btn:active {
+.log-save-btn:active {
   border-color: var(--accent);
   color: var(--accent);
 }

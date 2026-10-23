@@ -176,7 +176,7 @@ export default function LogWorkout({ day, navigate }) {
       </main>
 
       <footer className="log-footer">
-        <button className="save-btn" onClick={saveProgress}>
+        <button className="log-save-btn" onClick={saveProgress}>
           {saveStatus === 'saved' ? 'Saved ✓' : saveStatus === 'error' ? 'Retry Save' : 'Save'}
         </button>
         <button className="finish-btn" onClick={finishWorkout}>
